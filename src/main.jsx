@@ -1212,7 +1212,7 @@ function App() {
           }
         });
       },
-      { threshold: 0.12 },
+      { threshold: 0 },
     );
 
     sections.forEach((section) => observer.observe(section));

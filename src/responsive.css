@@ -161,20 +161,6 @@
     overscroll-behavior: contain;
   }
 
-  .category-pills {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scrollbar-width: thin;
-    scroll-snap-type: x proximity;
-    padding-bottom: 8px;
-  }
-
-  .category-pills button {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-  }
-
   .detail-layout {
     grid-template-columns: 1fr;
   }
@@ -2499,6 +2485,19 @@ footer {
 @media (max-width: 520px) {
   .hero {
     height: 360px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .control-inner {
+    flex-wrap: wrap;
+  }
+
+  .category-pills {
+    flex: 1 0 100%;
+    flex-wrap: wrap;
+    overflow: visible;
+    padding-bottom: 0;
   }
 }
 
