@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowRight,
@@ -573,13 +573,32 @@ function ContactPage({ preselectedProduct }) {
   return (
     <div className="contact-page">
       <section className="contact-hero">
-        <span className="eyebrow">Export &amp; Sourcing Desk</span>
-        <h1>Connect With Our Sourcing Team</h1>
-        <p>
-          Looking to source Indian whole spices in bulk? Share your products,
-          volume, destination and packaging requirements for a tailored quote.
-          Specifications and availability are confirmed for each order.
-        </p>
+        <div className="contact-hero-copy">
+          <span className="contact-kicker">Global Trade Desk &amp; HQ</span>
+          <h1>Connect With Our Sourcing Team</h1>
+          <p>
+            Looking to import premium Indian agricultural commodities in bulk?
+            Get in touch with our team for commercial quotes, order-specific
+            requirements, export coordination, and customised packaging
+            discussions.
+          </p>
+          <div className="contact-hero-actions">
+            <a className="contact-hero-primary" href="#contact-form">
+              Request a commercial quote <ArrowRight size={16} />
+            </a>
+            <a
+              className="contact-hero-secondary"
+              href="https://wa.me/917892786875"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Message us on WhatsApp
+            </a>
+          </div>
+          <div className="contact-hero-location">
+            <MapPin size={15} /> Mysuru, Karnataka, India
+          </div>
+        </div>
       </section>
 
       <div className="contact-layout">
@@ -1093,6 +1112,360 @@ function ProductDetailPage({ product, onBack, onRequestQuote, onOpenProduct }) {
   );
 }
 
+function AboutUsPage() {
+  const [selectedCredential, setSelectedCredential] = useState(null);
+  const closeCredentialButton = useRef(null);
+  const credentials = [
+    {
+      name: "Udyam Registration",
+      type: "Registration",
+      identifierLabel: "Registration ID",
+      identifier: "UDYAM-KR-22-0151085",
+      description:
+        "Registered with the Ministry of Micro, Small and Medium Enterprises, Government of India.",
+      document: "/certificates/udyam-registration-certificate.pdf",
+    },
+    {
+      name: "IEC (Import Export Code)",
+      type: "Registration",
+      identifierLabel: "IEC",
+      identifier: "HNUPM0596R",
+      description:
+        "Importer-Exporter Code issued by the Directorate General of Foreign Trade.",
+      document: "/certificates/import-export-code.pdf",
+    },
+    {
+      name: "GST Registration",
+      type: "Registration",
+      identifierLabel: "GSTIN",
+      identifier: "29HNUPM0596R1ZH",
+      description:
+        "Goods and Services Tax registration certificate for Veltara International.",
+      document: "/certificates/gst-registration-certificate.pdf",
+    },
+    {
+      name: "ISO 22000:2018 Certification",
+      type: "Food Safety Management",
+      identifierLabel: "Certificate Number",
+      identifier: "UQ - 2026101917",
+      validity: "Valid through 18 October 2029",
+      description:
+        "Food safety management system certification covering rice, flour, spices and other food products.",
+      document: "/certificates/iso-22000-2018-certificate.pdf",
+    },
+  ];
+
+  useEffect(() => {
+    if (!selectedCredential) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    const previousActiveElement = document.activeElement;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setSelectedCredential(null);
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
+    closeCredentialButton.current?.focus();
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      if (previousActiveElement instanceof HTMLElement) {
+        previousActiveElement.focus();
+      }
+    };
+  }, [selectedCredential]);
+
+  return (
+    <div className="about-page">
+      <section className="about-hero">
+        <div className="about-hero-inner">
+          <span className="about-eyebrow">About Veltara International</span>
+          <h1>Indian agriculture, connected to global markets.</h1>
+          <p>
+            We connect international buyers with India’s agricultural and
+            food-product supply chain through origin-led sourcing, clear
+            specifications, and coordinated export support.
+          </p>
+          <div className="about-hero-actions">
+            <a className="about-action-primary" href="/#products">
+              Explore our products <ArrowRight size={16} />
+            </a>
+            <a className="about-action-secondary" href="/contact">
+              Partner with us
+            </a>
+          </div>
+          <div className="about-location">
+            <MapPin size={16} />
+            <span>Mysuru, Karnataka, India</span>
+            <i aria-hidden="true">•</i>
+            <span>Quality · Trust · Growth</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="about-overview">
+        <div className="about-overview-copy">
+          <span className="about-section-label">Our roots</span>
+          <h2>A sourcing partner built around buyer requirements.</h2>
+          <p>
+            Veltara International is an India-based merchant exporter. We help
+            buyers explore agricultural products from Indian origins, align
+            product grades and packaging with their needs, and coordinate
+            order-specific export requirements.
+          </p>
+          <p>
+            Product availability, specifications, packaging, and order terms
+            are confirmed for each enquiry, keeping conversations transparent
+            from selection through shipment planning.
+          </p>
+        </div>
+        <div className="about-overview-note">
+          <span>Our approach</span>
+          <strong>Origin knowledge. Buyer-led details. Reliable coordination.</strong>
+          <p>
+            Every order begins with understanding the product, destination
+            requirements, and the details that matter to the buyer.
+          </p>
+        </div>
+      </section>
+
+      <section className="about-mission-section">
+        <div className="about-mission-card">
+          <span>Our mission</span>
+          <h2>Make Indian-origin sourcing clearer and more dependable.</h2>
+          <p>
+            We aim to connect buyers with suitable Indian agricultural and
+            food products through transparent communication, order-specific
+            specifications, and coordinated export support.
+          </p>
+        </div>
+        <div className="about-mission-card about-vision-card">
+          <span>Our vision</span>
+          <h2>Build lasting partnerships across the global food trade.</h2>
+          <p>
+            We aspire to be a trusted link between Indian suppliers and
+            international buyers, known for thoughtful sourcing and responsive
+            collaboration.
+          </p>
+        </div>
+      </section>
+
+      <section className="about-values-section">
+        <div className="about-section-heading">
+          <span className="about-section-label">How we work</span>
+          <h2>Principles behind every partnership.</h2>
+          <p>
+            We keep the process focused on the product, the buyer’s
+            requirements, and clear order-by-order communication.
+          </p>
+        </div>
+        <div className="about-values-grid">
+          {[
+            {
+              icon: <ShieldCheck />,
+              title: "Integrity",
+              text: "Clear communication about product details, availability, and order terms.",
+            },
+            {
+              icon: <ClipboardCheck />,
+              title: "Specification-led",
+              text: "Grades and packing details are discussed and confirmed for each order.",
+            },
+            {
+              icon: <Sprout />,
+              title: "Origin-focused",
+              text: "We work with Indian agricultural origins and product supply networks.",
+            },
+            {
+              icon: <Globe2 />,
+              title: "Buyer partnership",
+              text: "Responsive coordination keeps buyer requirements central to the process.",
+            },
+          ].map((value) => (
+            <article className="about-value-card" key={value.title}>
+              <span className="about-value-icon">{value.icon}</span>
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="about-process-section">
+        <div className="about-section-heading">
+          <span className="about-section-label">From enquiry to shipment</span>
+          <h2>A clear path from product interest to order coordination.</h2>
+          <p>
+            The sequence is tailored to the product, destination, and final
+            order requirements.
+          </p>
+        </div>
+        <div className="about-process-grid">
+          {[
+            {
+              title: "Understand requirements",
+              text: "Discuss product, destination, preferred grade, packing, and order volume.",
+            },
+            {
+              title: "Explore sourcing options",
+              text: "Review suitable products and origins based on buyer needs and availability.",
+            },
+            {
+              title: "Confirm order details",
+              text: "Agree final specifications, packaging, MOQ, and commercial terms for the order.",
+            },
+            {
+              title: "Coordinate export",
+              text: "Align the agreed order requirements and shipment coordination with the buyer.",
+            },
+          ].map((step, index) => (
+            <article className="about-process-card" key={step.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="credentials-section" id="about">
+        <div className="credentials-heading">
+          <span>Compliance Hub</span>
+          <h2>Official Credentials</h2>
+          <p>
+            Business registration and trade credentials for Veltara
+            International. Open a document to review the supplied certificate.
+          </p>
+        </div>
+        <div className="credentials-grid">
+          {credentials.map((credential) => (
+            <article className="credential-card" key={credential.name}>
+              <div className="credential-card-header">
+                <span className="credential-type">{credential.type}</span>
+                <span className="credential-status">Document on file</span>
+              </div>
+              <h3>{credential.name}</h3>
+              <p>{credential.description}</p>
+              <p className="credential-identifier">
+                <strong>{credential.identifierLabel}</strong>
+                <span>{credential.identifier}</span>
+                {credential.validity && (
+                  <span className="credential-validity">{credential.validity}</span>
+                )}
+              </p>
+              <div className="credential-preview">
+                <iframe
+                  src={`${credential.document}#toolbar=0&navpanes=0`}
+                  title={`${credential.name} certificate preview`}
+                  loading="lazy"
+                />
+                <button
+                  type="button"
+                  className="credential-preview-action"
+                  aria-label={`View details for ${credential.name}`}
+                  onClick={() => setSelectedCredential(credential)}
+                >
+                  <Search size={16} />
+                  <span>View certificate</span>
+                </button>
+              </div>
+              <button
+                type="button"
+                className="credential-document-link"
+                onClick={() => setSelectedCredential(credential)}
+              >
+                View Details <ArrowRight size={15} />
+              </button>
+            </article>
+          ))}
+        </div>
+        {selectedCredential && (
+          <div
+            className="credential-modal-backdrop"
+            onClick={() => setSelectedCredential(null)}
+          >
+            <section
+              className="credential-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="credential-modal-title"
+              aria-describedby="credential-modal-description"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="credential-modal-preview-pane">
+                <div className="credential-modal-preview">
+                  <iframe
+                    src={`${selectedCredential.document}#toolbar=0&navpanes=0`}
+                    title={`${selectedCredential.name} document preview`}
+                  />
+                </div>
+              </div>
+              <div className="credential-modal-content">
+                <button
+                  ref={closeCredentialButton}
+                  type="button"
+                  className="credential-modal-close"
+                  aria-label="Close certificate details"
+                  onClick={() => setSelectedCredential(null)}
+                >
+                  <X size={20} />
+                </button>
+                <div className="credential-card-header">
+                  <span className="credential-type">
+                    {selectedCredential.type}
+                  </span>
+                  <span className="credential-status">Document on file</span>
+                </div>
+                <h2 id="credential-modal-title">
+                  {selectedCredential.name}
+                </h2>
+                <div className="credential-modal-accent" />
+                <p id="credential-modal-description">
+                  {selectedCredential.description}
+                </p>
+                <div className="credential-modal-highlights">
+                  <h3>Document details</h3>
+                  <dl>
+                    <div>
+                      <dt>{selectedCredential.identifierLabel}</dt>
+                      <dd>{selectedCredential.identifier}</dd>
+                    </div>
+                    {selectedCredential.validity && (
+                      <div>
+                        <dt>Validity stated on certificate</dt>
+                        <dd>{selectedCredential.validity}</dd>
+                      </div>
+                    )}
+                  </dl>
+                </div>
+                <div className="credential-modal-actions">
+                  <a
+                    className="credential-open-tab"
+                    href={selectedCredential.document}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open in new tab <ArrowRight size={15} />
+                  </a>
+                  <button
+                    type="button"
+                    className="credential-back-button"
+                    onClick={() => setSelectedCredential(null)}
+                  >
+                    Back to credentials
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
 function App() {
   const [category, setCategory] = useState("All Categories");
   const [mode, setMode] = useState("Export");
@@ -1103,6 +1476,9 @@ function App() {
   );
   const [heroIndex, setHeroIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(productFromPath);
+  const [aboutPage, setAboutPage] = useState(
+    () => window.location.pathname === "/about",
+  );
   const [contactPage, setContactPage] = useState(
     () => window.location.pathname === "/contact",
   );
@@ -1118,6 +1494,7 @@ function App() {
       `/products/${productSlug(product)}`,
     );
     setSelectedProduct(product);
+    setAboutPage(false);
     setContactPage(false);
     setExportPage(false);
     setProductsMenuOpen(false);
@@ -1130,6 +1507,7 @@ function App() {
       : "/contact";
     window.history.pushState({ contact: true }, "", url);
     setSelectedProduct(null);
+    setAboutPage(false);
     setContactPage(true);
     setExportPage(false);
     setContactProduct(product || null);
@@ -1141,6 +1519,7 @@ function App() {
   function closeProductDetails() {
     window.history.replaceState({}, "", "/#products");
     setSelectedProduct(null);
+    setAboutPage(false);
     setContactPage(false);
     setExportPage(false);
     setContactProduct(null);
@@ -1152,6 +1531,7 @@ function App() {
   useEffect(() => {
     const handlePopState = () => {
       setSelectedProduct(productFromPath());
+      setAboutPage(window.location.pathname === "/about");
       setContactPage(window.location.pathname === "/contact");
       setExportPage(window.location.pathname === "/export");
       setContactProduct(productFromContactQuery());
@@ -1179,14 +1559,16 @@ function App() {
   }, [menuOpen]);
 
   useEffect(() => {
-    document.title = contactPage
+    document.title = aboutPage
+      ? "About Us | Veltara International"
+      : contactPage
       ? "Contact & Export Enquiries | Veltara International"
       : exportPage
         ? "Indian Spice Exports | Veltara International"
         : selectedProduct
         ? `${selectedProduct.name} | Veltara International`
         : "Veltara International | Indian Agricultural Exporter";
-  }, [contactPage, exportPage, selectedProduct]);
+  }, [aboutPage, contactPage, exportPage, selectedProduct]);
 
   useEffect(() => {
     if (selectedProduct) window.scrollTo({ top: 0 });
@@ -1194,7 +1576,7 @@ function App() {
 
   useEffect(() => {
     const sections = document.querySelectorAll(
-      ".catalog-controls, .catalog, .sourcing-flow, .footer-main",
+      ".catalog-controls, .catalog, .credentials-section, .sourcing-flow, .footer-main",
     );
     sections.forEach((section) => section.classList.add("reveal-section"));
 
@@ -1217,7 +1599,7 @@ function App() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [selectedProduct, contactPage, exportPage]);
+  }, [selectedProduct, aboutPage, contactPage, exportPage]);
 
   const visibleProducts = useMemo(
     () =>
@@ -1299,12 +1681,20 @@ function App() {
           <div className="mobile-nav-links">
           <a
             href="/#home"
-            className={!contactPage && !exportPage && !selectedProduct ? "active" : ""}
+            className={
+              !aboutPage && !contactPage && !exportPage && !selectedProduct
+                ? "active"
+                : ""
+            }
             onClick={() => setMenuOpen(false)}
           >
             Home
           </a>
-          <a href="/#about" onClick={() => setMenuOpen(false)}>
+          <a
+            href="/about"
+            className={aboutPage ? "active" : ""}
+            onClick={() => setMenuOpen(false)}
+          >
             About Us
           </a>
           <div className={productsMenuOpen ? "nav-products-menu open" : "nav-products-menu"}>
@@ -1454,6 +1844,8 @@ function App() {
           />
         ) : exportPage ? (
           <ExportPage onRequestQuote={() => openContact(null)} />
+        ) : aboutPage ? (
+          <AboutUsPage />
         ) : selectedProduct ? (
           <ProductDetailPage
             product={selectedProduct}
@@ -1642,7 +2034,7 @@ function App() {
           )}
         </section>
 
-        <section className="sourcing-flow" id="about">
+        <section className="sourcing-flow">
           <div className="sourcing-flow-heading">
             <span>How We Operate</span>
             <h2>Our Quality Sourcing &amp; Delivery Flow</h2>
@@ -1764,7 +2156,7 @@ function App() {
           <div className="footer-column">
             <h3>Quick Links</h3>
             <a href="/#home"><ArrowRight size={12} /> Home</a>
-            <a href="/#about"><ArrowRight size={12} /> About Us</a>
+            <a href="/about"><ArrowRight size={12} /> About Us</a>
             <a href="/#products"><ArrowRight size={12} /> Products</a>
             <a href="/export"><ArrowRight size={12} /> Export</a>
             <a href="/contact"><ArrowRight size={12} /> Contact Us</a>
@@ -1840,7 +2232,7 @@ function App() {
             © {new Date().getFullYear()} Veltara International. All rights reserved.
           </small>
           <div>
-            <a href="/#about">About Us</a>
+            <a href="/about">About Us</a>
             <a href="/contact">Enquire Now</a>
           </div>
         </div>
