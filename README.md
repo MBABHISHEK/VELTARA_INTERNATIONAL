@@ -37,3 +37,7 @@ npm run preview
 - Import this GitHub repository into Vercel.
 - Keep the detected Vite settings: build command `npm run build`, output directory `dist`.
 - `vercel.json` rewrites client-side routes to the React app entry point.
+
+## Deploy to Hostinger
+- Run `npm run build` and upload the **contents** of `dist` to the domain's `public_html` directory.
+- Keep `public/.htaccess` in the uploaded output; it lets Apache-compatible hosting serve the React app for routes such as `/export`, `/contact`, and `/products/*`.
